@@ -155,21 +155,21 @@ if __name__ == "__main__":
 
     send_weights_data = tf_ns_msg_pb2.WeightArray()
     send_weights_data.request_type = 1
-    for index in range(0, 5):
+    for index in range(0, 1):
         object1_data = send_weights_data.payload.add()
         object1_data.object_id = 1
         object1_data.length = 256
         for i in range(0, object1_data.length):
             object1_data.weights.append(i + 3.1412568)
-        object1_data.angle = 90.06
+        object1_data.angle = 45.06
 
     tfclient = TCPClient(0)
 
-    # tfclient.connect()
-    # print("Connect success")
-    # tfclient.clear_all_queue()
-    # print("Clear queue success")
-    # tfclient.close()
+    tfclient.connect()
+    print("Connect success")
+    tfclient.clear_all_queue()
+    print("Clear queue success")
+    tfclient.close()
 
     timeout_cnt = 0
 
@@ -207,12 +207,12 @@ if __name__ == "__main__":
                     print("successfully receive data sended_id {}".format(res_payload.sended_id))
                     compare_payload = tf_ns_msg_pb2.WeightArray()
                     compare_payload.carid = vehicle_list[veh_index]
-                    compare_payload.total_object = 3
+                    compare_payload.total_object = 1
                     compare_payload.request_type = 2
                     for j in range(compare_payload.total_object):
                         obj = compare_payload.payload.add()
-                        obj.comparison_object_id = 2
-
+                        obj.comparison_object_id = 10
+                        obj.angle = -45
                     compare_payload.simulationTime = 15
                     tfclient.send_payload(carid=vehicle_list[veh_index], payload=compare_payload)
 
