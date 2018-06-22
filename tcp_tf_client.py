@@ -1,7 +1,7 @@
 import socket
 import time
-from TCPserver import tf_ns_msg_pb2
-from TCPserver import *
+from tftcpClient import tf_ns_msg_pb2
+from tftcpClient import *
 
 HOST, PORT = "", 26789
 
